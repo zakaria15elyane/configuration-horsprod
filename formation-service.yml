@@ -37,9 +37,13 @@ spring:
   datasource:
    driver-class-name: com.mysql.cj.jdbc.Driver
    url: jdbc:mysql://localhost:3306/formation
+   username:
+   password:
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true 
     # Hibernate ddl strategy (create, create-drop, update)
-   hibernate: 
-     ddl-auto: create
     # Dialect database
    properties: 
      hibernate:
