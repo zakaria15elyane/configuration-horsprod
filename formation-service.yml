@@ -31,8 +31,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/formation
-    username: null
-    password: null
+    username:
+    password: 
   jpa:
     hibernate.ddl-auto: update
     generate-ddl: true
@@ -58,5 +58,5 @@ spring:
     generate-ddl: true
     show-sql: false
   datasource:
-    username: null
-    password: null
+    username: 
+    password: 
