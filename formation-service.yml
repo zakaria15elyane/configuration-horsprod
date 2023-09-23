@@ -1,6 +1,6 @@
 info:
   app:
-    name: formation service application
+    name: formation 
     description: Microservice FORMATION
     version: 1.0.0.0
     
@@ -31,16 +31,12 @@ management:
         time-to-live: 30s
         
 
-#set timeout on secondes 
-token :
-  timeout: 600  # == 10 minutes !!
-  refresh: 300000 # == un mois !!
   
 spring:
- # data source MARIA DB settings
+ # data source mysql DB settings
   datasource:
    driver-class-name: com.mysql.cj.jdbc.Driver
-   url: jdbc:mysql://localhost:3306/formation?useLegacyDatetimeCode=false&serverTimezone=UTC
+   url: jdbc:mysql://localhost:3306/formation
     # Hibernate ddl strategy (create, create-drop, update)
    hibernate: 
      ddl-auto: validate
@@ -58,9 +54,6 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
     healthcheck:
       enabled: true
-
-# module name
-module_name: Absence         
 
 # feign time set connectTime out & read Time out
 ribbon:
@@ -81,6 +74,8 @@ spring:
     active: dev-local
   # Show or not log sql
   jpa: 
+   hibernate.ddl-auto: update
+   generate-ddl: true 
    show-sql: true
   datasource:
    username: 
