@@ -1,0 +1,23 @@
+info:
+  app:
+    name: registry service application
+    description: Microservice registry 
+    version: 1.0.0.0
+    
+# prevent the register in eurka config
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+        
+  server:
+    enableSelfPreservation: true
+    eviction-interval-timer-in-ms: 5000
+
+
+# profil DEV-LOCAL
+---
+spring:
+  profiles: dev-local
+
+
