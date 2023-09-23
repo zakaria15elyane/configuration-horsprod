@@ -1,19 +1,17 @@
+---
 info:
   app:
-    name: formation 
+    name: formation
     description: Microservice FORMATION
     version: 1.0.0.0
-    
 message-properties-file: formation.message.properties
-    
-# Spring Boot Actuator
 management:
   endpoints:
     enabled-by-default: false
     web:
       base-path: /actuator
       exposure:
-        include: "health,info,prometheus"
+        include: health,info,prometheus
     info:
       git:
         mode: full
@@ -29,27 +27,19 @@ management:
       enabled: true
       cache:
         time-to-live: 30s
-        
-
-  
 spring:
- # data source mysql DB settings
   datasource:
-   driver-class-name: com.mysql.cj.jdbc.Driver
-   url: jdbc:mysql://localhost:3306/formation
-   username:
-   password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/formation
+    username: null
+    password: null
   jpa:
     hibernate.ddl-auto: update
     generate-ddl: true
-    show-sql: true 
-    # Hibernate ddl strategy (create, create-drop, update)
-    # Dialect database
-   properties: 
-     hibernate:
-      dialect: org.hibernate.dialect.MySQL5Dialect
-
-# config registry
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
 eureka:
   instance:
     hostname: localhost
@@ -59,17 +49,14 @@ eureka:
     healthcheck:
       enabled: true
 
-        
-# profil DEV-LOCAL
----  
+---
 spring:
   profiles:
     active: dev-local
-  # Show or not log sql
-  jpa: 
-   hibernate.ddl-auto: create
-   generate-ddl: true 
-   show-sql: false
+  jpa:
+    hibernate.ddl-auto: create
+    generate-ddl: true
+    show-sql: false
   datasource:
-   username: 
-   password:
+    username: null
+    password: null
