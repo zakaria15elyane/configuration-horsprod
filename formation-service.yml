@@ -55,17 +55,6 @@ eureka:
     healthcheck:
       enabled: true
 
-# feign time set connectTime out & read Time out
-ribbon:
-    eureka:
-        enabled: true
-    ConnectTimeout: 30000
-    ReadTimeout: 30000
-
-# bdd name
-bdd_name: formations
-
-
         
 # profil DEV-LOCAL
 ---  
