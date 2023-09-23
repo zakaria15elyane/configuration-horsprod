@@ -1,0 +1,88 @@
+info:
+  app:
+    name: formation service application
+    description: Microservice FORMATION
+    version: 1.0.0.0
+    
+message-properties-file: formation.message.properties
+    
+# Spring Boot Actuator
+management:
+  endpoints:
+    enabled-by-default: false
+    web:
+      base-path: /actuator
+      exposure:
+        include: "health,info,prometheus"
+    info:
+      git:
+        mode: full
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+    info:
+      enabled: true
+      cache:
+        time-to-live: 300s
+    prometheus:
+      enabled: true
+      cache:
+        time-to-live: 30s
+        
+
+#set timeout on secondes 
+token :
+  timeout: 600  # == 10 minutes !!
+  refresh: 300000 # == un mois !!
+  
+spring:
+ # data source MARIA DB settings
+  datasource:
+   driver-class-name: com.mysql.cj.jdbc.Driver
+   url: jdbc:mysql://localhost:3306/formation?useLegacyDatetimeCode=false&serverTimezone=UTC
+    # Hibernate ddl strategy (create, create-drop, update)
+   hibernate: 
+     ddl-auto: validate
+    # Dialect database
+   properties: 
+     hibernate:
+      dialect: org.hibernate.dialect.MySQL5Dialect
+
+# config registry
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    healthcheck:
+      enabled: true
+
+# module name
+module_name: Absence         
+
+# feign time set connectTime out & read Time out
+ribbon:
+    eureka:
+        enabled: true
+    ConnectTimeout: 30000
+    ReadTimeout: 30000
+
+# bdd name
+bdd_name: formations
+
+
+        
+# profil DEV-LOCAL
+---  
+spring:
+  profiles:
+    active: dev-local
+  # Show or not log sql
+  jpa: 
+   show-sql: true
+  datasource:
+   username: 
+   password: 
+
