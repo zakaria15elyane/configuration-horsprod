@@ -1,0 +1,79 @@
+info:
+  app:
+    name: gateway service application
+    description: Microservice spring cloud gateway
+    version: 1.0.0.0
+
+
+# Spring Boot Actuator
+management:
+  endpoints:
+    enabled-by-default: false
+    web:
+      base-path: /actuator
+      exposure:
+        include: "health,info,prometheus"
+    info:
+      git:
+        mode: full
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+    info:
+      enabled: true
+      cache:
+        time-to-live: 300s
+    prometheus:
+      enabled: true
+      cache:
+        time-to-live: 30s
+    serviceregistry:
+      enabled: true
+
+eureka:
+  client:
+    #    register-with-eureka: false
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+ 
+spring:
+  main:
+    web-application-type: reactive
+    allow-bean-definition-overriding: true
+  cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: '*'
+            allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Content-Length, TOKEN, Authorization'
+            allowedMethods: 'GET, POST, PATCH, PUT, DELETE, OPTIONS'
+            maxAge: 3628800
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: formation
+          predicates:
+            - Path=/formation-api/**
+          filters:
+            - StripPrefix=1
+          uri: lb://formation-service          
+
+# profile dev-local
+---
+spring:
+  profiles: dev-local
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    healthcheck:
+      enabled: true
