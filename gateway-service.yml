@@ -41,18 +41,8 @@ spring:
   cloud:
     gateway:
       default-filters:
-        - DedupeResponseHeader=Access-Control-Allow-Origin
-      globalcors:
-        cors-configurations:
-          '[/**]':
-            allowedOrigins: '*'
-            allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Content-Length, TOKEN, Authorization'
-            allowedMethods: 'GET, POST, PATCH, PUT, DELETE, OPTIONS'
-            maxAge: 3628800
-      discovery:
-        locator:
-          enabled: true
-          lower-case-service-id: true
+      - PrefixPath=/httpbin
+      - AddResponseHeader=X-Response-Default-Foo, Default-Bar
       routes:
         - id: formation
           predicates:
